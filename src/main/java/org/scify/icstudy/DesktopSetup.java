@@ -43,6 +43,13 @@ public class DesktopSetup {
             curImg = grabber.grab();
             if (curImg != null) {
                 canvas.showImage(curImg);
+                // flush the bufer with a 10% chance
+                if (Math.random() < 0.1) {
+                    // DEBUG LINES
+                    System.out.println("Flushing buffer..");
+                    //////////////
+                    grabber.flush();
+                }
             }
         }
         grabber.stop();

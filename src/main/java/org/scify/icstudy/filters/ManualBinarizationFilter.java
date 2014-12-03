@@ -15,7 +15,7 @@ public class ManualBinarizationFilter extends ThresholdingFilter {
     protected void applyThreshold(IplImage sourceImage, IplImage destImage) {
         cvThreshold(sourceImage,
                 destImage,
-                FREQ_MID_VALUE,
+                FREQ_WHITE_SEPARATION_VALUE,
                 FREQ_MAX_VALUE,
                 CV_THRESH_BINARY
         );

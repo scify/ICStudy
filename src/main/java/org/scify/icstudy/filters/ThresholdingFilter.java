@@ -20,8 +20,9 @@ public abstract class ThresholdingFilter extends DefaultICSeeFilter {
 
     public static final double FREQ_MIN_VALUE = 0;
     public static final double FREQ_MID_VALUE = 127;
+    public static final double FREQ_WHITE_SEPARATION_VALUE = 200;
     public static final double FREQ_MAX_VALUE = 255;
-    public static final int KERNEL_SIZE = 3;
+    public static final int KERNEL_SIZE = 1;
 
     @Override
     public IplImage filter(IplImage sourceImage) {

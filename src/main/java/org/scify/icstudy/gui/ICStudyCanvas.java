@@ -6,13 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.bytedeco.javacpp.opencv_core.CvRect;
 import org.bytedeco.javacpp.opencv_core.IplImage;
-import static org.bytedeco.javacpp.opencv_core.cvCreateImage;
-import static org.bytedeco.javacpp.opencv_core.cvGetSize;
-import static org.bytedeco.javacpp.opencv_core.cvRect;
-import static org.bytedeco.javacpp.opencv_core.cvResetImageROI;
-import static org.bytedeco.javacpp.opencv_core.cvSetImageROI;
-import static org.bytedeco.javacpp.opencv_imgproc.CV_INTER_LINEAR;
-import static org.bytedeco.javacpp.opencv_imgproc.cvResize;
 import org.bytedeco.javacv.CanvasFrame;
 import org.scify.icstudy.filters.ICSeeFilter;
 import org.scify.icstudy.filters.NullFilter;
@@ -25,22 +18,22 @@ public class ICStudyCanvas extends CanvasFrame {
 
     private List<ICSeeFilter> filters;
     private ICSeeFilter selectedFilter;
-    private CvRect roi;
-    private IplImage inputImage, zoomedImage;
+//    private CvRect roi;
+//    private IplImage inputImage, zoomedImage;
     private int selectedIndex;
-    private int zoom, speed;
-    private int offsetX, offsetY;
+//    private int zoom, speed;
+//    private int offsetX, offsetY;
 
     public ICStudyCanvas(String title) {
         super(title);
         filters = new ArrayList();
         selectedFilter = new NullFilter();
-        roi = new CvRect();
+//        roi = new CvRect();
         selectedIndex = 0;
-        zoom = 0;
-        offsetX = 0;
-        offsetY = 0;
-        speed = 1;
+//        zoom = 0;
+//        offsetX = 0;
+//        offsetY = 0;
+//        speed = 1;
         initComponents();
     }
 
@@ -53,36 +46,36 @@ public class ICStudyCanvas extends CanvasFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    zoom += speed;
-                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    zoom -= speed;
-                    if (zoom < 0) {
-                        zoom += speed;
-                    } else if (zoom > getHeight() / 2) {
-                        zoom -= speed;
-                    }
-                } else if (e.getKeyCode() == KeyEvent.VK_D) {
-                    offsetX += speed;
-                    if (zoom + offsetX + roi.width() > inputImage.width()) {
-                        offsetX -= speed;
-                    }
-                } else if (e.getKeyCode() == KeyEvent.VK_A) {
-                    offsetX -= speed;
-                    if (zoom + offsetX < 0) {
-                        offsetX += speed;
-                    }
-                } else if (e.getKeyCode() == KeyEvent.VK_S) {
-                    offsetY += speed;
-                    if (zoom + offsetY + roi.height() > inputImage.height()) {
-                        offsetY -= speed;
-                    }
-                } else if (e.getKeyCode() == KeyEvent.VK_W) {
-                    offsetY -= speed;
-                    if (zoom + offsetY < 0) {
-                        offsetY += speed;
-                    }
-                }
+//                if (e.getKeyCode() == KeyEvent.VK_UP) {
+//                    zoom += speed;
+//                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+//                    zoom -= speed;
+//                    if (zoom < 0) {
+//                        zoom += speed;
+//                    } else if (zoom > getHeight() / 2) {
+//                        zoom -= speed;
+//                    }
+//                } else if (e.getKeyCode() == KeyEvent.VK_D) {
+//                    offsetX += speed;
+//                    if (zoom + offsetX + roi.width() > inputImage.width()) {
+//                        offsetX -= speed;
+//                    }
+//                } else if (e.getKeyCode() == KeyEvent.VK_A) {
+//                    offsetX -= speed;
+//                    if (zoom + offsetX < 0) {
+//                        offsetX += speed;
+//                    }
+//                } else if (e.getKeyCode() == KeyEvent.VK_S) {
+//                    offsetY += speed;
+//                    if (zoom + offsetY + roi.height() > inputImage.height()) {
+//                        offsetY -= speed;
+//                    }
+//                } else if (e.getKeyCode() == KeyEvent.VK_W) {
+//                    offsetY -= speed;
+//                    if (zoom + offsetY < 0) {
+//                        offsetY += speed;
+//                    }
+//                }
             }
 
             @Override
@@ -95,19 +88,20 @@ public class ICStudyCanvas extends CanvasFrame {
                     previousFilter();
                     System.out.println("Switched to "
                             + selectedFilter);
-                } else if (e.getKeyCode() == KeyEvent.VK_R) {
-                    zoom = 0;
-                    offsetX = 0;
-                    offsetY = 0;
-                } else if (e.getKeyCode() == KeyEvent.VK_Q) {
-                    dispose();
-                } else if (e.getKeyCode() == KeyEvent.VK_1) {
-                    speed = 1;
-                } else if (e.getKeyCode() == KeyEvent.VK_2) {
-                    speed = 5;
-                } else if (e.getKeyCode() == KeyEvent.VK_3) {
-                    speed = 10;
                 }
+//                else if (e.getKeyCode() == KeyEvent.VK_R) {
+//                    zoom = 0;
+//                    offsetX = 0;
+//                    offsetY = 0;
+//                } else if (e.getKeyCode() == KeyEvent.VK_Q) {
+//                    dispose();
+//                } else if (e.getKeyCode() == KeyEvent.VK_1) {
+//                    speed = 1;
+//                } else if (e.getKeyCode() == KeyEvent.VK_2) {
+//                    speed = 5;
+//                } else if (e.getKeyCode() == KeyEvent.VK_3) {
+//                    speed = 10;
+//                }
             }
 
         };
@@ -165,20 +159,21 @@ public class ICStudyCanvas extends CanvasFrame {
      * @param image
      */
     public void showImage(IplImage image) {
-        inputImage = image;
-        if (zoom > 0) {
-            roi = cvRect(zoom + offsetX,
-                    zoom + offsetY,
-                    inputImage.width() - zoom,
-                    inputImage.height() - zoom);
-            cvSetImageROI(inputImage, roi);
-            zoomedImage = cvCreateImage(cvGetSize(inputImage), inputImage.depth(), inputImage.nChannels());
-            cvResize(inputImage, zoomedImage, CV_INTER_LINEAR);
-            cvResetImageROI(inputImage);
-            super.showImage(selectedFilter.filter(zoomedImage));
-        } else {
-            super.showImage(selectedFilter.filter(inputImage));
-        }
+//        inputImage = image;
+//        if (zoom > 0) {
+//            roi = cvRect(zoom + offsetX,
+//                    zoom + offsetY,
+//                    inputImage.width() - zoom,
+//                    inputImage.height() - zoom);
+//            cvSetImageROI(inputImage, roi);
+//            zoomedImage = cvCreateImage(cvGetSize(inputImage), inputImage.depth(), inputImage.nChannels());
+//            cvResize(inputImage, zoomedImage, CV_INTER_LINEAR);
+//            cvResetImageROI(inputImage);
+//            super.showImage(selectedFilter.filter(zoomedImage));
+//        } else {
+//            super.showImage(selectedFilter.filter(inputImage));
+//        }
+        super.showImage(selectedFilter.filter(image));
     }
 
 }
