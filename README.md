@@ -13,8 +13,8 @@ We can support filtering on feed live-streamed from another computer (through ht
 
 Main Technologies
 -----------------
-<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/32/OpenCV_Logo_with_text_svg_version.svg/750px-OpenCV_Logo_with_text_svg_version.svg.png" alt="OpenCV" style="width:100px;height:auto">
+<a href="http://opencv.org/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/32/OpenCV_Logo_with_text_svg_version.svg/750px-OpenCV_Logo_with_text_svg_version.svg.png" alt="OpenCV" style="width:100px;height:auto"></a>
 
-<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/OpenJDK_logo.png/200px-OpenJDK_logo.png" alt="Java" style="width:100px;height:auto">
+<a href="http://openjdk.java.net/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/OpenJDK_logo.png/200px-OpenJDK_logo.png" alt="Java" style="width:100px;height:auto"></a>
 
 [1]: http://www.scify.gr/site/en/projects/in-progress/icsee
