@@ -20,12 +20,14 @@ import org.bytedeco.javacpp.opencv_core.IplConvKernel;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import static org.bytedeco.javacpp.opencv_core.cvCreateImage;
 import static org.bytedeco.javacpp.opencv_core.cvGetSize;
+import static org.bytedeco.javacpp.opencv_core.cvReleaseImage;
 import static org.bytedeco.javacpp.opencv_imgproc.COLOR_GRAY2RGB;
 import static org.bytedeco.javacpp.opencv_imgproc.MORPH_ELLIPSE;
 import static org.bytedeco.javacpp.opencv_imgproc.COLOR_RGB2GRAY;
 import static org.bytedeco.javacpp.opencv_imgproc.cvCreateStructuringElementEx;
 import static org.bytedeco.javacpp.opencv_imgproc.cvCvtColor;
 import static org.bytedeco.javacpp.opencv_imgproc.cvDilate;
+import static org.bytedeco.javacpp.opencv_imgproc.cvReleaseStructuringElement;
 
 /**
  *
@@ -55,6 +57,10 @@ public abstract class ThresholdingFilter extends DefaultICSeeFilter {
         applyThreshold(procImg, procImg);
 
         cvCvtColor(procImg, sourceImage, COLOR_GRAY2RGB);
+
+        // Release image and kernel
+        cvReleaseStructuringElement(kernel);
+        cvReleaseImage(procImg);
 
         return sourceImage;
 
