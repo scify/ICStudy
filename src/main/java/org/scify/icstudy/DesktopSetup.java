@@ -38,8 +38,10 @@ public class DesktopSetup {
         // args[0] = The IP (i.e 192.168.1.1)
         // args[1] = The filename that holds the stream (i.e desktopRecording)
         // args[2] = The extension of the file (i.e mp4)
-        FrameGrabber grabber = new FFmpegFrameGrabber("http://" + args[0] + "/" + args[1] + "." + args[2]);
-        grabber.setFormat(args[2]);
+//        FrameGrabber grabber = new FFmpegFrameGrabber("http://" + args[0] + "/" + args[1] + "." + args[2]);
+        FrameGrabber grabber = new FFmpegFrameGrabber("http://192.168.1.4:5051/desktop.ogg");
+//        grabber.setFormat(args[2]);
+        grabber.setFormat("ogg");
         grabber.setImageWidth(SCR_WIDTH);
         grabber.setImageHeight(SCR_HEIGHT);
 
@@ -58,8 +60,8 @@ public class DesktopSetup {
             curImg = grabber.grab();
             if (curImg != null) {
                 canvas.showImage(curImg);
-                // flush the bufer with a 10% chance
-                if (Math.random() < 0.1) {
+                // Flush the bufer with a 2% chance
+                if (Math.random() < 0.02) {
                     // DEBUG LINES
                     System.out.println("Flushing buffer..");
                     //////////////
