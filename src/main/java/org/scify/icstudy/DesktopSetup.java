@@ -16,6 +16,7 @@
 package org.scify.icstudy;
 
 import java.awt.Toolkit;
+import java.util.Date;
 import javax.swing.JFrame;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
@@ -38,10 +39,19 @@ public class DesktopSetup {
         // args[0] = The IP (i.e 192.168.1.1)
         // args[1] = The filename that holds the stream (i.e desktopRecording)
         // args[2] = The extension of the file (i.e mp4)
-        FrameGrabber grabber = new FFmpegFrameGrabber("http://" + args[0] + "/" + args[1] + "." + args[2]);
+        // TODO: Restore
+//        FrameGrabber grabber = new FFmpegFrameGrabber("http://" + args[0] + "/" + args[1] + "." + args[2]);
+        String sPort;
+        if (args.length > 0)
+            sPort = args[0];
+        else
+            sPort = "25055";
+        FrameGrabber grabber = new FFmpegFrameGrabber("udp://@:" + sPort);
+        System.out.println("Listening on port " + sPort);
+//        FrameGrabber grabber = new FFmpegFrameGrabber("x.sdp");
 //        FrameGrabber grabber = new FFmpegFrameGrabber("http://192.168.1.4:5152/desktop.ogg");
-        grabber.setFormat(args[2]);
-//        grabber.setFormat("ogg");
+//        grabber.setFormat(args[2]);
+//        grabber.setFormat("mpeg4");
         grabber.setImageWidth(SCR_WIDTH);
         grabber.setImageHeight(SCR_HEIGHT);
 
@@ -56,18 +66,26 @@ public class DesktopSetup {
 
         IplImage curImg;
 
+        long lLastUpdate = 0L;
         grabber.start();
         while (canvas.isDisplayable()) {
             curImg = grabber.grab();
+            // Drop if less than 0.1 have passed
+            long lNow = new Date().getTime();
+            if (lNow - lLastUpdate < 500)
+                continue;
+            lLastUpdate = lNow;
+            
             if (curImg != null) {
                 canvas.showImage(curImg);
                 // Flush the bufer with a 2% chance
-                if (Math.random() < 0.02) {
-                    // DEBUG LINES
-                    System.out.println("Flushing buffer..");
-                    //////////////
-                    grabber.flush();
-                }
+//                if (Math.random() < 0.02) {
+//                    // DEBUG LINES
+//                    System.out.println("Flushing buffer..");
+//                    //////////////
+//                    grabber.flush();
+//                }
+                System.err.println("Received data...");
             }
         }
         grabber.stop();

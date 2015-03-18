@@ -95,12 +95,15 @@ public class Menu extends javax.swing.JFrame {
 
         extField.setEditable(false);
         extField.setBackground(java.awt.Color.lightGray);
+        extField.setText("ogg");
 
         fileField.setEditable(false);
         fileField.setBackground(java.awt.Color.lightGray);
+        fileField.setText("desktop");
 
         ipField.setEditable(false);
         ipField.setBackground(java.awt.Color.lightGray);
+        ipField.setText("192.168.1.99:5055");
 
         ipExampleLabel.setText("(i.e 192.168.0.15:8080)");
 
