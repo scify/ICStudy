@@ -9,7 +9,7 @@ Implementation
 --------------
 The ICStudy project involves both software and hardware solutions, this means we should be able to utilize hardware (interactive boards, mobile devices) and build software accordingly. The current version (Beta) is an extended implementation of [ICSee][1].
 
-We can support filtering on feed live-streamed from another computer (through http). This partially solves the problem described in the above section, if the school uses an interactive (digital) board. Filtering can also be applied on camera feed, to solve the usual case of schools using a blackboard (thus, there is no way to get a digital image of the board). The hardware specifications of the webcam are vital to this solution.
+We can support filtering on feed live-streamed from another computer (through http). This partially solves the problem described in the above section, if the school uses an interactive (digital) board.
 
 Main Technologies
 -----------------
