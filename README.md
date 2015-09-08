@@ -5,6 +5,13 @@ Abstract
 --------
 Students with severe sight conditions (partially blind), cannot absorb the educational process as well as other students: they cannot see the classroom board, or read books/notes. ICStudy is a solution developed by SciFY which helps students with such conditions attend classes and participate. It is also an open call to all developers to help, so that a useful, fully functional and stable version can be made.
 
+Installation - Dependencies
+---------------------------
+1. Install Yasm (assembler disassembler for the Intel x86 architecture) by running sudo apt-get install yasm
+2. Download and install ffmpeg protocol (Warning: Dn not download it from aptitude, choose this link instead: <a href="https://www.ffmpeg.org">https://www.ffmpeg.org</a>)
+3. Run ICStudy - Client/runClientWin.sh (common for Windows and Linux platforms)
+4. Run ICStudy - Server/getIpAndStreamLinux.sh or getIpAndStreamWin.sh, based on the server's platform.
+
 Implementation
 --------------
 The ICStudy project involves both software and hardware solutions, this means we should be able to utilize hardware (interactive boards, mobile devices) and build software accordingly. The current version (Beta) is an extended implementation of [ICSee][1].
