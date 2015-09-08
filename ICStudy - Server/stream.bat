@@ -1,0 +1,2 @@
+bash ./getIPAndStream.sh
+pause
