@@ -18,7 +18,8 @@ Installation - Dependencies
 
 Compilation
 -----------
-This is a Maven-based project (<a href="https://maven.apache.org/">https://maven.apache.org</a>), so, in order for all the dependencies to load, you should first run the required Maven commands:
+This is a Maven-based project (<a href="https://maven.apache.org/">https://maven.apache.org</a>), so, in order for all the dependencies to load, you should first run the required Maven commands
+
 1. mvn --version (It should print out your installed version of Maven)
 2. Download the packaged dependencies .jar file from <a href="https://www.dropbox.com/s/0c4sn7gphkbv3p1/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar?dl=1">here</a>
 3. Place the downloaded .jar file under /ICStudy - Client/ directory.
