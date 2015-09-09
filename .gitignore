@@ -5,3 +5,4 @@ nbactions.xml
 /ICStudy\ -\ Cient/ip.txt
 /ICStudy\ -\ Server/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar
 *.jar
+/ip.txt
