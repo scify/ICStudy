@@ -6,3 +6,4 @@ nbactions.xml
 /ICStudy\ -\ Server/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar
 *.jar
 /ip.txt
+.directory
