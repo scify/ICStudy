@@ -86,9 +86,9 @@ public class ICStudyCanvas extends CanvasFrame {
         String ip = networkList.initNetworks();
         System.out.println(ip);
 
-            sendRequest(ip);
+        sendRequest(ip);
 
-        /*SciFyGetPropertyValues properties = new SciFyGetPropertyValues();
+        SciFyGetPropertyValues properties = new SciFyGetPropertyValues();
         try {
             String propIp = properties.getIpValue();
             System.out.println("saved ip is: " + propIp);
@@ -98,7 +98,7 @@ public class ICStudyCanvas extends CanvasFrame {
             }
         } catch(IOException e) {
             System.out.println(e);
-        }*/
+        }
 
 
 

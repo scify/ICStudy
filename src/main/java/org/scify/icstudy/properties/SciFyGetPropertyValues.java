@@ -2,62 +2,51 @@ package org.scify.icstudy.properties;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.Properties;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
 
-/**
- * @author Crunchify.com
- *
- */
 
 public class SciFyGetPropertyValues {
     String result = "";
-    InputStream inputStream;
-
     public String getIpValue() throws IOException {
-        String ip = " ";
+        File file;
         try {
-            Properties prop = new Properties();
             String propFileName = "config.properties";
-
-            inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-
-            if (inputStream != null) {
-                prop.load(inputStream);
-            } else {
-                throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
-            }
-
-            ip = prop.getProperty("ip");
+            /*URL url = getClass().getResource(propFileName);
+            System.out.println(url.toURI().getPath());*/
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            file = new File(s+"/..");
+            String pathToProps = file.getCanonicalPath() + "/src/main/resources/" + propFileName;
+            System.out.println(pathToProps);
+            PropertiesConfiguration config = new PropertiesConfiguration(pathToProps);
+            result = config.getProperty("ip").toString();
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-        } finally {
-            inputStream.close();
         }
-        return ip;
+        return result;
     }
 
 
     public void setIpValue(String ip) throws IOException {
-
+        File file;
         try {
-            Properties prop = new Properties();
             String propFileName = "config.properties";
-
-            inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-            System.out.println(inputStream);
-            if (inputStream != null) {
-                prop.load(inputStream);
-            } else {
-                throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
-            }
-            System.out.println("Setting new ip:" + ip);
-            prop.setProperty("ip",ip);
+            /*URL url = getClass().getResource(propFileName);
+            System.out.println(url.toURI().getPath());*/
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            file = new File(s+"/..");
+            String pathToProps = file.getCanonicalPath() + "/src/main/resources/" + propFileName;
+            System.out.println(pathToProps);
+            PropertiesConfiguration config = new PropertiesConfiguration(pathToProps);
+            config.setProperty("ip", ip);
+            config.save();
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-        } finally {
-            inputStream.close();
         }
     }
 
