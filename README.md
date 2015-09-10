@@ -15,16 +15,13 @@ Installation - Dependencies
 ---------------------------
 1. Install Yasm (assembler /disassembler for the Intel x86 architecture) by running sudo apt-get install yasm
 2. Download and install ffmpeg protocol (Warning: Do not download it from aptitude, choose this link instead: <a href="https://www.ffmpeg.org">https://www.ffmpeg.org</a>)
-3. Download the packaged dependencies .jar file from <a href="https://www.dropbox.com/s/0c4sn7gphkbv3p1/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar?dl=1">here</a>
-4. Place the downloaded .jar file under /ICStudy - Client/ directory.
 
 Compilation
 -----------
 This is a Maven-based project (<a href="https://maven.apache.org/">https://maven.apache.org</a>), so, in order for all the dependencies to load, you should first run the required Maven commands
 
-1. mvn --version (It should print out your installed version of Maven)
-2. mvn validate (Validate that the project is correct and all necessary information is available)
-3. mvn package (Take the compiled code and package it in its distributable format, such as a JAR.)
+1. mvn validate (Validate that the project is correct and all necessary information is available)
+2. mvn package exec:java -Dplatform.dependencies (Take the compiled code and package it in its distributable format, such as a JAR, along with the dependencies)
 
 Deployment
 ----------

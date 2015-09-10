@@ -23,6 +23,18 @@ import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacv.CanvasFrame;
 import org.scify.icstudy.filters.ICSeeFilter;
 import org.scify.icstudy.filters.NullFilter;
+import org.scify.icstudy.network.NetworkList;
+import org.scify.icstudy.properties.SciFyGetPropertyValues;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  *
@@ -50,7 +62,46 @@ public class ICStudyCanvas extends CanvasFrame {
         initComponents();
     }
 
+    private void sendRequest(String ip) {
+        String url = "http://users.iit.demokritos.gr/~ggianna/ICStudy/registerIP.php?school=true&clientIp=" + ip;
+        int responseCode = 0;
+        try {
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            // optional default is GET
+            con.setRequestMethod("GET");
+            responseCode = con.getResponseCode();
+        } catch (MalformedURLException e) {
+            System.out.println(e);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        System.out.println("\nSending 'GET' request to URL : " + url);
+        System.out.println("Response Code : " + responseCode);
+    }
+
+
     private void initComponents() {
+        NetworkList networkList = new NetworkList();
+        String ip = networkList.initNetworks();
+        System.out.println(ip);
+
+            sendRequest(ip);
+
+        /*SciFyGetPropertyValues properties = new SciFyGetPropertyValues();
+        try {
+            String propIp = properties.getIpValue();
+            System.out.println("saved ip is: " + propIp);
+            if(propIp == null) {
+
+                properties.setIpValue(ip);
+            }
+        } catch(IOException e) {
+            System.out.println(e);
+        }*/
+
+
+
         KeyListener controls = new KeyListener() {
 
             @Override
