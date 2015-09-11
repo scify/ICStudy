@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import java.io.File;
 
 
-public class SciFyGetPropertyValues {
+public class SciFyPropertyValues {
     String result = "";
-    public String getIpValue() throws IOException {
+    public String getValue(String name) throws IOException {
         File file;
         try {
             String propFileName = "config.properties";
@@ -23,7 +23,7 @@ public class SciFyGetPropertyValues {
             String pathToProps = file.getCanonicalPath() + "/src/main/resources/" + propFileName;
             System.out.println(pathToProps);
             PropertiesConfiguration config = new PropertiesConfiguration(pathToProps);
-            result = config.getProperty("ip").toString();
+            result = config.getProperty(name).toString();
         } catch (Exception e) {
             System.out.println("Exception: " + e);
         }
@@ -31,7 +31,7 @@ public class SciFyGetPropertyValues {
     }
 
 
-    public void setIpValue(String ip) throws IOException {
+    public void setValue(String name, String value) throws IOException {
         File file;
         try {
             String propFileName = "config.properties";
@@ -43,7 +43,7 @@ public class SciFyGetPropertyValues {
             String pathToProps = file.getCanonicalPath() + "/src/main/resources/" + propFileName;
             System.out.println(pathToProps);
             PropertiesConfiguration config = new PropertiesConfiguration(pathToProps);
-            config.setProperty("ip", ip);
+            config.setProperty(name, value);
             config.save();
         } catch (Exception e) {
             System.out.println("Exception: " + e);

@@ -15,26 +15,21 @@
  */
 package org.scify.icstudy.gui;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacv.CanvasFrame;
 import org.scify.icstudy.filters.ICSeeFilter;
 import org.scify.icstudy.filters.NullFilter;
 import org.scify.icstudy.network.NetworkList;
-import org.scify.icstudy.properties.SciFyGetPropertyValues;
-import java.util.Properties;
-import java.io.FileNotFoundException;
+import org.scify.icstudy.properties.SciFyPropertyValues;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -88,13 +83,13 @@ public class ICStudyCanvas extends CanvasFrame {
 
         sendRequest(ip);
 
-        SciFyGetPropertyValues properties = new SciFyGetPropertyValues();
+        SciFyPropertyValues properties = new SciFyPropertyValues();
         try {
-            String propIp = properties.getIpValue();
+            String propIp = properties.getValue("ip");
             System.out.println("saved ip is: " + propIp);
             if(propIp == null) {
 
-                properties.setIpValue(ip);
+                properties.setValue("ip", ip);
             }
         } catch(IOException e) {
             System.out.println(e);
