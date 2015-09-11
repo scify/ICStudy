@@ -2,8 +2,8 @@
 nb-configuration.xml
 nbactions.xml
 .idea/
-/ICStudy\ -\ Cient/ip.txt
-/ICStudy\ -\ Server/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar
+/ICStudy\ -\ Cient/*
+/ICStudy\ -\ Server/*
 *.jar
 /ip.txt
 .directory
