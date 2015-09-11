@@ -75,27 +75,40 @@ public class ICStudyCanvas extends CanvasFrame {
         System.out.println("Response Code : " + responseCode);
     }
 
-
-    private void initComponents() {
-        NetworkList networkList = new NetworkList();
-        String ip = networkList.initNetworks();
-        System.out.println(ip);
-
-        sendRequest(ip);
-
+    private String getSavedIp() {
         SciFyPropertyValues properties = new SciFyPropertyValues();
+        String propIp = "";
         try {
-            String propIp = properties.getValue("ip");
+            propIp = properties.getValue("ip");
             System.out.println("saved ip is: " + propIp);
-            if(propIp == null) {
-
-                properties.setValue("ip", ip);
-            }
         } catch(IOException e) {
             System.out.println(e);
         }
+        return propIp;
+    }
+
+    private String getNewIp() {
+        SciFyPropertyValues properties = new SciFyPropertyValues();
+        NetworkList networkList = new NetworkList();
+        String ip = networkList.initNetworks();
+        try {
+            properties.setValue("ip", ip);
+        } catch(IOException e) {
+            System.out.println(e);
+        }
+        System.out.println("new IP is: " + ip);
+        return ip;
+    }
+
+    private void initComponents() {
+
+        String ip = getSavedIp();
+        if(ip == "") {
+            ip = getNewIp();
 
 
+        }
+        sendRequest(ip);
 
         KeyListener controls = new KeyListener() {
 
