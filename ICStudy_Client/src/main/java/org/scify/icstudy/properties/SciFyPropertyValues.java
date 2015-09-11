@@ -20,7 +20,7 @@ public class SciFyPropertyValues {
             Path currentRelativePath = Paths.get("");
             String s = currentRelativePath.toAbsolutePath().toString();
             file = new File(s+"/..");
-            String pathToProps = file.getCanonicalPath() + "/src/main/resources/" + propFileName;
+            String pathToProps = file.getCanonicalPath() + "/ICStudy_Client/src/main/resources/" + propFileName;
             System.out.println(pathToProps);
             PropertiesConfiguration config = new PropertiesConfiguration(pathToProps);
             result = config.getProperty(name).toString();
@@ -40,7 +40,7 @@ public class SciFyPropertyValues {
             Path currentRelativePath = Paths.get("");
             String s = currentRelativePath.toAbsolutePath().toString();
             file = new File(s+"/..");
-            String pathToProps = file.getCanonicalPath() + "/src/main/resources/" + propFileName;
+            String pathToProps = file.getCanonicalPath() + "/ICStudy_Client/src/main/resources/" + propFileName;
             System.out.println(pathToProps);
             PropertiesConfiguration config = new PropertiesConfiguration(pathToProps);
             config.setProperty(name, value);
