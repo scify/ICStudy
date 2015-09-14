@@ -19,14 +19,18 @@ Installation - Dependencies
 Compilation
 -----------
 This is a Maven-based project (<a href="https://maven.apache.org/">https://maven.apache.org</a>), so, in order for all the dependencies to load, you should first run the required Maven commands
+<b>The following steps should be followed for both sub-directories</b> (ICStudy_Client and ICStudy_Server)
 
 1. mvn validate (Validate that the project is correct and all necessary information is available)
 2. mvn package exec:java -Dplatform.dependencies (Take the compiled code and package it in its distributable format, such as a JAR, along with the dependencies)
 
 Deployment
 ----------
-1. Run ICStudy - Client/runClientWin.sh (common for Windows and Linux platforms)
-2. Run ICStudy - Server/getIpAndStreamLinux.sh or getIpAndStreamWin.sh, based on the server's platform.
+For the Server application:
+Run java -jar ICStudy_Server/target/ICStudy_Server-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+For the Client application:
+Run java -jar ICStudy_Client/target/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 Main Technologies
 -----------------
