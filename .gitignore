@@ -1,9 +1,6 @@
-/target/
+target/
 nb-configuration.xml
 nbactions.xml
 .idea/
-/ICStudy\ -\ Cient/*
-/ICStudy\ -\ Server/*
 *.jar
-/ip.txt
 .directory
