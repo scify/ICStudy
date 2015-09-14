@@ -19,6 +19,7 @@ Installation - Dependencies
 Compilation
 -----------
 This is a Maven-based project (<a href="https://maven.apache.org/">https://maven.apache.org</a>), so, in order for all the dependencies to load, you should first run the required Maven commands
+
 <b>The following steps should be followed for both sub-directories</b> (ICStudy_Client and ICStudy_Server)
 
 1. mvn validate (Validate that the project is correct and all necessary information is available)
