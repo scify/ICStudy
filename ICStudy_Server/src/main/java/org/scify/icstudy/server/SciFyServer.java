@@ -2,6 +2,7 @@ package org.scify.icstudy.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,13 +25,36 @@ public class SciFyServer {
             if(new String("Linux").equals(osName) ) {
                 System.out.println("running linux");
                 pr = rt.exec("ffmpeg -s 1024x768 -f x11grab -i :0.0 -r 30 -vcodec mpeg4 -q 1 -s 768x1024 -f mpegts udp://" + ip + ":25055");
+                Scanner scanner = new Scanner(pr.getInputStream());
+                while (scanner.hasNext()) {
+                    System.out.println(scanner.nextLine());
+                }
             } else {
-                pr = rt.exec("ffmpeg -s 1024x768 -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
+                System.out.println("running windows");
+                //Runtime.getRuntime().exec("ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
+                String query = "ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055";
+                /*try
+                {
+                    Process p=Runtime.getRuntime().exec(query);
+                    p.waitFor();
+                    BufferedReader reader=new BufferedReader(
+                            new InputStreamReader(p.getInputStream())
+                    );
+                    String line;
+                    while((line = reader.readLine()) != null)
+                    {
+                        System.out.println(line);
+                    }
+
+                }
+                catch(IOException e1) {}
+                catch(InterruptedException e2) {}*/
+
+                Runtime.getRuntime().exec(query);
+
+                System.out.println("Done");
             }
-            Scanner scanner = new Scanner(pr.getInputStream());
-            while (scanner.hasNext()) {
-                System.out.println(scanner.nextLine());
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

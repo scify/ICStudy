@@ -100,14 +100,23 @@ public class ICStudyCanvas extends CanvasFrame {
         return ip;
     }
 
+    private String getNewIpNoSave() {
+        NetworkList networkList = new NetworkList();
+        String ip = networkList.initNetworks();
+
+        System.out.println("new IP is: " + ip);
+        return ip;
+    }
+
     private void initComponents() {
 
-        String ip = getSavedIp();
+        /*String ip = getSavedIp();
         if(ip == "") {
             ip = getNewIp();
 
 
-        }
+        }*/
+        String ip = getNewIpNoSave();
         sendRequest(ip);
 
         KeyListener controls = new KeyListener() {

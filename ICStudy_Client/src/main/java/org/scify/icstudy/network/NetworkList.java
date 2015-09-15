@@ -10,7 +10,21 @@ public class NetworkList {
     static String displayInterfaceInformation(NetworkInterface netint) throws SocketException {
         boolean next = false;
         Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+        String osName = System.getProperty("os.name");
+        System.out.println(osName);
+        if(! new String("Linux").equals(osName) ) {
+            try {
+                InetAddress IP = InetAddress.getLocalHost();
+                String ipWindows = IP.getHostAddress();
+                System.out.println("IP of my system is := " + ipWindows);
+                return ipWindows;
+            } catch(UnknownHostException e) {
+                System.out.println(e);
+            }
+        }
+
         for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+            System.out.println(inetAddress.toString());
             if(next) {
                 return inetAddress.toString().substring(inetAddress.toString().lastIndexOf("/") + 1);
             }

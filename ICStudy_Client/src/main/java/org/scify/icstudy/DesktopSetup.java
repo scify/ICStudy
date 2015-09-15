@@ -67,9 +67,14 @@ public class DesktopSetup {
         IplImage curImg;
 
         long lLastUpdate = 0L;
+        System.out.println("before grabber.start()");
         grabber.start();
+        System.out.println("after grabber.start()");
+        System.out.println("canvas: " + canvas.isDisplayable());
         while (canvas.isDisplayable()) {
+
             curImg = grabber.grab();
+            System.out.println("img: " + curImg);
             // Drop if less than 0.1 have passed
             long lNow = new Date().getTime();
             if (lNow - lLastUpdate < 500)
