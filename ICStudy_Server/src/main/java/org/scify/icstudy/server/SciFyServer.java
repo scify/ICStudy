@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class SciFyServer {
 
-    public static void main(String[] args) {
+    public static void main() {
         Runtime rt = Runtime.getRuntime();
         String osName = System.getProperty("os.name");
         System.out.println(osName);

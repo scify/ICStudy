@@ -22,7 +22,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.scify.icstudy.server.SciFyServer</mainClass>
+                            <mainClass>org.scify.icstudy.server.SciFY_GUI</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
