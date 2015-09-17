@@ -28,7 +28,7 @@ public class NetworkList {
             if(next) {
                 return inetAddress.toString().substring(inetAddress.toString().lastIndexOf("/") + 1);
             }
-            if(inetAddress.toString().contains("eth0")) {
+            if(inetAddress.toString().contains("eth0") || inetAddress.toString().contains("e0")) {
                 next = true;
             }
         }

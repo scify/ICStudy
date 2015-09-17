@@ -67,7 +67,7 @@ public class SciFY_GUI extends JFrame {
     private static void runServer() {
         SciFyServer.main();
     }
-    
+
 
     public static void main(String[] args) {
 
