@@ -20,20 +20,39 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class SciFY_GUI extends JFrame {
+
+    SciFyServer server;
+
 
     public SciFY_GUI() {
 
         initUI();
     }
 
+    private void stopServer() {
+        System.out.println(server);
+        this.server.stopServer();
+    }
+
+    private void startServer() {
+        server = new SciFyServer();
+        //System.out.println(server);
+        server.startServer();
+
+    }
+
+
     private void initUI() {
+        JButton quitButton = new JButton("Quit");
+        JButton startButton = new JButton("Start");
 
         setLayout(null);
 
-        JButton quitButton = new JButton("Quit");
-        JButton startButton = new JButton("Start");
+
         startButton.setBounds(50, 50, 80, 25);
         quitButton.setBounds(350, 50, 80, 25);
 
@@ -43,6 +62,8 @@ public class SciFY_GUI extends JFrame {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
+                stopServer();
+
                 System.exit(0);
             }
         });
@@ -50,22 +71,23 @@ public class SciFY_GUI extends JFrame {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                runServer();
+
             }
         });
 
-        /*createLayout(startButton);
-        createLayout(quitButton);*/
         setResizable(false);
         setTitle("ICStudy Server");
         setSize(500, 250);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-    }
+        Thread thread = new Thread() {
+            public void run() {
+                startServer();
+            }
+        };
+        thread.start();
 
-    private static void runServer() {
-        SciFyServer.main();
     }
 
 
@@ -79,7 +101,6 @@ public class SciFY_GUI extends JFrame {
                 ex.setVisible(true);
             }
         });
-        runServer();
-
+        //runServer();
     }
 }

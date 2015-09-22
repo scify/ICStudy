@@ -52,6 +52,8 @@ public class DesktopSetup {
 //        FrameGrabber grabber = new FFmpegFrameGrabber("http://192.168.1.4:5152/desktop.ogg");
 //        grabber.setFormat(args[2]);
 //        grabber.setFormat("mpeg4");
+        System.out.println("Screen height: " + SCR_HEIGHT);
+        System.out.println("Screen width: " + SCR_WIDTH);
         grabber.setImageWidth(SCR_WIDTH);
         grabber.setImageHeight(SCR_HEIGHT);
 

@@ -1,9 +1,6 @@
 package org.scify.icstudy.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -13,19 +10,28 @@ import java.util.Scanner;
  */
 public class SciFyServer {
 
+    Process pr;
+
     public static void main() {
+    }
+
+    public SciFyServer() {
+    }
+
+    public void startServer() {
         Runtime rt = Runtime.getRuntime();
         String osName = System.getProperty("os.name");
         System.out.println(osName);
-        SciFyServer sciFyServer = new SciFyServer();
-        String ip = sciFyServer.sendRequest();
+        //SciFyServer sciFyServer = new SciFyServer();
+        String ip = sendRequest();
         System.out.println(ip);
+
         try {
-            Process pr;
+
             if(new String("Linux").equals(osName) ) {
                 System.out.println("running linux");
-                pr = rt.exec("ffmpeg -s 1024x768 -f x11grab -i :0.0 -r 30 -vcodec mpeg4 -q 1 -s 768x1024 -f mpegts udp://" + ip + ":25055");
-                Scanner scanner = new Scanner(pr.getInputStream());
+                this.pr = rt.exec("ffmpeg -s 1024x768 -f x11grab -i :0.0 -r 30 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
+                Scanner scanner = new Scanner(this.pr.getInputStream());
                 while (scanner.hasNext()) {
                     System.out.println(scanner.nextLine());
                 }
@@ -33,12 +39,12 @@ public class SciFyServer {
                 System.out.println("running windows");
                 //Runtime.getRuntime().exec("ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
                 String query = "ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055";
-                /*try
+                try
                 {
-                    Process p=Runtime.getRuntime().exec(query);
-                    p.waitFor();
+                    this.pr=Runtime.getRuntime().exec(query);
+                    pr.waitFor();
                     BufferedReader reader=new BufferedReader(
-                            new InputStreamReader(p.getInputStream())
+                            new InputStreamReader(pr.getInputStream())
                     );
                     String line;
                     while((line = reader.readLine()) != null)
@@ -48,9 +54,7 @@ public class SciFyServer {
 
                 }
                 catch(IOException e1) {}
-                catch(InterruptedException e2) {}*/
-
-                Runtime.getRuntime().exec(query);
+                catch(InterruptedException e2) {}
 
                 System.out.println("Done");
             }
@@ -58,6 +62,21 @@ public class SciFyServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void stopServer() {
+        this.pr.destroy();
+        /*OutputStream ostream = this.pr.getOutputStream(); //Get the output stream of the process, which translates to what would be user input for the commandline
+        try {
+            ostream.write("q\n".getBytes());       //write out the character Q, followed by a newline or carriage return so it registers that Q has been 'typed' and 'entered'.
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ostream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
 
     public String sendRequest() {
