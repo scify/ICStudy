@@ -20,12 +20,11 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.OutputStream;
 
 public class SciFY_GUI extends JFrame {
 
     SciFyServer server;
+    private boolean isServerRunning = false;
 
 
     public SciFY_GUI() {
@@ -48,7 +47,7 @@ public class SciFY_GUI extends JFrame {
 
     private void initUI() {
         JButton quitButton = new JButton("Quit");
-        JButton startButton = new JButton("Start");
+        final JButton startButton = new JButton("Start");
 
         setLayout(null);
 
@@ -58,12 +57,13 @@ public class SciFY_GUI extends JFrame {
 
         add(startButton);
         add(quitButton);
-        startButton.setEnabled(false);
+        //startButton.setEnabled(true);
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                stopServer();
-
+                if (isServerRunning) {
+                    stopServer();
+                }
                 System.exit(0);
             }
         });
@@ -71,7 +71,18 @@ public class SciFY_GUI extends JFrame {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
+                Thread thread = new Thread() {
+                    public void run() {
+                        startServer();
 
+                    }
+                };
+                if (!isServerRunning) {
+                    thread.start();
+                    isServerRunning = true;
+                }
+                else
+                    System.out.println("Server already running!");
             }
         });
 
@@ -81,12 +92,7 @@ public class SciFY_GUI extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        Thread thread = new Thread() {
-            public void run() {
-                startServer();
-            }
-        };
-        thread.start();
+
 
     }
 
