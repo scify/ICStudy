@@ -1,0 +1,3 @@
+[submodule "ICStudy-server"]
+	path = ICStudy-server
+	url = ssh://project_icstudy@backend1.scify.org:222/home/scifydev/scifyGit/ICStudy/ICStudy-server.git
