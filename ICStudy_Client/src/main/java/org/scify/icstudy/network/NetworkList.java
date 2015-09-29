@@ -40,10 +40,13 @@ public class NetworkList {
 
         for (InetAddress inetAddress : Collections.list(inetAddresses)) {
             System.out.println(inetAddress.toString());
+            System.out.println(inetAddress.getCanonicalHostName());
+            System.out.println(inetAddress.getHostName());
+            System.out.println(inetAddress.isLoopbackAddress());
             if(next) {
                 return inetAddress.toString().substring(inetAddress.toString().lastIndexOf("/") + 1);
             }
-            if(inetAddress.toString().contains("eth0") || inetAddress.toString().contains("e0")) {
+            if(! inetAddress.isLoopbackAddress()) {
                 next = true;
             }
         }

@@ -57,7 +57,7 @@ public class DesktopSetup {
         else
             sPort = "25055";
 
-        final JFrame frame = new JFrame("ICStudy");
+        /*final JFrame frame = new JFrame("ICStudy");
 
         frame.setSize(500, 250);
 
@@ -96,7 +96,8 @@ public class DesktopSetup {
                 }
                 frame.setVisible(false);
             }
-        });
+        });*/
+        createICStudyCanvas(sPort);
     }
 
     private static void createICStudyCanvas(String sPort) throws FrameGrabber.Exception {

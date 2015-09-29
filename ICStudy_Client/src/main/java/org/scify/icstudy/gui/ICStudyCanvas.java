@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -43,6 +44,7 @@ public class ICStudyCanvas extends CanvasFrame {
     private List<ICSeeFilter> filters;
     private ICSeeFilter selectedFilter;
     private int selectedIndex;
+    private static String connection_id = "scify_test";
 
     public ICStudyCanvas(String title) {
         super(title);
@@ -57,8 +59,9 @@ public class ICStudyCanvas extends CanvasFrame {
         initComponents();
     }
 
-    private void sendRequest(String ip) {
-        String url = "http://users.iit.demokritos.gr/~ggianna/ICStudy/registerIP.php?school=true&clientIp=" + ip;
+    private void sendRequest(String ip, String connection_id) {
+        //String url = "http://users.iit.demokritos.gr/~ggianna/ICStudy/registerIP.php?school=true&clientIp=" + ip;
+        String url = "http://icstudy.projects.development1.scify.org/www/ICStudy-server/public/api/clientsignup?connection_id=" + connection_id + "&client_ip=" + ip;
         int responseCode = 0;
         try {
             URL obj = new URL(url);
@@ -117,7 +120,7 @@ public class ICStudyCanvas extends CanvasFrame {
 
         }*/
         String ip = getNewIpNoSave();
-        sendRequest(ip);
+        sendRequest(ip, connection_id);
 
         KeyListener controls = new KeyListener() {
 
@@ -176,6 +179,20 @@ public class ICStudyCanvas extends CanvasFrame {
 //                    speed = SPEED_2;
 //                } else if (e.getKeyCode() == KeyEvent.VK_3) {
 //                    speed = SPEED_3;
+                }
+                else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.out.println("escape");
+                    try {
+                        Runtime runtime = Runtime.getRuntime();
+                        Process proc = runtime.exec("shutdown -h now");
+                        //System.exit(0);
+                        Scanner scanner = new Scanner(proc.getInputStream());
+                        while (scanner.hasNext()) {
+                            System.out.println(scanner.nextLine());
+                        }
+                    } catch (IOException ex) {
+                    }
+
                 }
             }
 

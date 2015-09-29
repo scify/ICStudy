@@ -22,6 +22,7 @@ import java.util.Scanner;
 public class SciFyServer {
 
     Process pr;
+    private static String connection_id = "scify_test";
 
     public static void main() {
     }
@@ -34,7 +35,7 @@ public class SciFyServer {
         String osName = System.getProperty("os.name");
         System.out.println(osName);
         //SciFyServer sciFyServer = new SciFyServer();
-        String ip = sendRequest();
+        String ip = sendRequest(connection_id);
         System.out.println(ip);
 
         try {
@@ -90,8 +91,10 @@ public class SciFyServer {
         }*/
     }
 
-    public String sendRequest() {
-        String urlToRead = "http://users.iit.demokritos.gr/~ggianna/ICStudy/ip.txt";
+    public String sendRequest(String connection_id) {
+        //String urlToRead = "http://users.iit.demokritos.gr/~ggianna/ICStudy/ip.txt";
+        String urlToRead = "http://icstudy.projects.development1.scify.org/www/ICStudy-server/public/api/getclientip?connection_id=" + connection_id;
+        System.out.println(urlToRead);
         URL url;
         HttpURLConnection conn;
         BufferedReader rd;

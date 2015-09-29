@@ -64,7 +64,7 @@ public class SciFY_GUI extends JFrame {
                 if (isServerRunning) {
                     stopServer();
                 }
-                System.exit(0);
+                //System.exit(0);
             }
         });
 
@@ -74,11 +74,11 @@ public class SciFY_GUI extends JFrame {
                 Thread thread = new Thread() {
                     public void run() {
                         startServer();
-
                     }
                 };
                 if (!isServerRunning) {
                     thread.start();
+                    startButton.setEnabled(false);
                     isServerRunning = true;
                 }
                 else
