@@ -63,6 +63,8 @@ public class SciFY_GUI extends JFrame {
             public void actionPerformed(ActionEvent event) {
                 if (isServerRunning) {
                     stopServer();
+                    isServerRunning = false;
+                    startButton.setEnabled(true);
                 }
                 //System.exit(0);
             }

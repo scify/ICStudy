@@ -127,7 +127,6 @@ public class DesktopSetup {
         System.out.println("before grabber.start()");
         grabber.start();
         System.out.println("after grabber.start()");
-        System.out.println("canvas: " + canvas.isDisplayable());
         while (canvas.isDisplayable()) {
 
             curImg = grabber.grab();
@@ -148,6 +147,8 @@ public class DesktopSetup {
 //                    grabber.flush();
 //                }
                 System.err.println("Received data...");
+            } else {
+                System.out.println("received a null img!");
             }
         }
         grabber.stop();

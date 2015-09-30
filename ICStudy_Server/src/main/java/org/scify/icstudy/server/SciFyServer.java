@@ -39,21 +39,32 @@ public class SciFyServer {
         System.out.println(ip);
 
         try {
-
+            File encodingFile = new File(".encoding");
             if(new String("Linux").equals(osName) ) {
                 System.out.println("running linux");
-                this.pr = rt.exec("ffmpeg -s 1024x768 -f x11grab -i :0.0 -r 30 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
-                Scanner scanner = new Scanner(this.pr.getInputStream());
-                while (scanner.hasNext()) {
-                    System.out.println(scanner.nextLine());
+                //this.pr = rt.exec("ffmpeg -loglevel debug -v verbose -s 1024x768 -f x11grab -i :0.0 -r 30 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
+
+                try {
+                    // Use a ProcessBuilder
+                    ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-s", "1024x768", "-f", "x11grab", "-i", ":0.0", "-r", "30", "-vcodec", "mpeg4", "-q", "1", "-f", "mpegts","udp://" + ip + ":25055");
+                    encodingFile.createNewFile();
+                    pb.redirectErrorStream(true);
+                    pb.redirectInput(ProcessBuilder.Redirect.PIPE); //optional, default behavior
+                    pb.redirectOutput(encodingFile);
+                    pr = pb.start();
+                    pr.waitFor();
+                    encodingFile.delete();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
             } else {
                 System.out.println("running windows");
                 //Runtime.getRuntime().exec("ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
                 String query = "ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055";
                 try
                 {
-                    this.pr=Runtime.getRuntime().exec(query);
+                    /*this.pr=Runtime.getRuntime().exec(query);
                     pr.waitFor();
                     BufferedReader reader=new BufferedReader(
                             new InputStreamReader(pr.getInputStream())
@@ -62,16 +73,25 @@ public class SciFyServer {
                     while((line = reader.readLine()) != null)
                     {
                         System.out.println(line);
-                    }
+                    }*/
+                    ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-f", "dshow","-i", "video=\"UScreenCapture\"", "-r", "10", "-vcodec", "mpeg4", "-q", "1", "-f", "mpegts","udp://" + ip + ":25055");
+                    encodingFile.createNewFile();
+                    pb.redirectErrorStream(true);
+                    pb.redirectInput(ProcessBuilder.Redirect.PIPE); //optional, default behavior
+                    pb.redirectOutput(encodingFile);
+                    pr = pb.start();
+                    pr.waitFor();
+                    encodingFile.delete();
 
                 }
-                catch(IOException e1) {}
-                catch(InterruptedException e2) {}
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 System.out.println("Done");
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
