@@ -15,6 +15,7 @@ Installation - Dependencies
 ---------------------------
 1. Install Yasm (assembler /disassembler for the Intel x86 architecture) by running sudo apt-get install yasm
 2. Download and install ffmpeg protocol (Warning: Do not download it from aptitude, choose this link instead: <a href="https://www.ffmpeg.org">https://www.ffmpeg.org</a>)
+3. In order for the Server code to run, jre (Java Runtime Environment) 7 or higher is required.
 
 Compilation
 -----------
