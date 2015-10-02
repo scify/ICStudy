@@ -15,6 +15,7 @@
  */
 package org.scify.icstudy.server;
 
+import java.awt.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -23,6 +24,9 @@ public class SciFyServer {
 
     Process pr;
     private static String connection_id = "scify_test";
+    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    int width = gd.getDisplayMode().getWidth();
+    int height = gd.getDisplayMode().getHeight();
 
     public static void main() {
     }
@@ -37,16 +41,19 @@ public class SciFyServer {
         //SciFyServer sciFyServer = new SciFyServer();
         String ip = sendRequest(connection_id);
         System.out.println(ip);
-
+        String screenResolution = width + "x" + height;
+        System.out.println("server resolution:" + screenResolution);
         try {
             File encodingFile = new File(".encoding");
             if(new String("Linux").equals(osName) ) {
                 System.out.println("running linux");
+                /*OLD WAY, it works, but overloads the OutputStream*/
+                /*That is why we used the encodingFile*/
                 //this.pr = rt.exec("ffmpeg -loglevel debug -v verbose -s 1024x768 -f x11grab -i :0.0 -r 30 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
 
                 try {
                     // Use a ProcessBuilder
-                    ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-s", "1024x768", "-f", "x11grab", "-i", ":0.0", "-r", "30", "-vcodec", "mpeg4", "-q", "1", "-f", "mpegts","udp://" + ip + ":25055");
+                    ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-s", screenResolution, "-f", "x11grab", "-i", ":0.0", "-r", "30", "-vcodec", "mpeg4", "-q", "1", "-f", "mpegts","udp://" + ip + ":25055");
                     encodingFile.createNewFile();
                     pb.redirectErrorStream(true);
                     pb.redirectInput(ProcessBuilder.Redirect.PIPE); //optional, default behavior
@@ -61,9 +68,12 @@ public class SciFyServer {
             } else {
                 System.out.println("running windows");
                 //Runtime.getRuntime().exec("ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
-                String query = "ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055";
+                //String query = "ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055";
                 try
                 {
+                    /*OLD WAY, it works, but overloads the OutputStream*/
+                    /*That is why we used the encodingFile*/
+
                     /*this.pr=Runtime.getRuntime().exec(query);
                     pr.waitFor();
                     BufferedReader reader=new BufferedReader(
@@ -74,7 +84,7 @@ public class SciFyServer {
                     {
                         System.out.println(line);
                     }*/
-                    ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-f", "dshow","-i", "video=\"UScreenCapture\"", "-r", "10", "-vcodec", "mpeg4", "-q", "1", "-f", "mpegts","udp://" + ip + ":25055");
+                    ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-s", screenResolution, "-f", "dshow","-i", "video=\"UScreenCapture\"", "-r", "10", "-vcodec", "mpeg4", "-q", "1", "-f", "mpegts","udp://" + ip + ":25055");
                     encodingFile.createNewFile();
                     pb.redirectErrorStream(true);
                     pb.redirectInput(ProcessBuilder.Redirect.PIPE); //optional, default behavior
@@ -98,17 +108,6 @@ public class SciFyServer {
 
     public void stopServer() {
         this.pr.destroy();
-        /*OutputStream ostream = this.pr.getOutputStream(); //Get the output stream of the process, which translates to what would be user input for the commandline
-        try {
-            ostream.write("q\n".getBytes());       //write out the character Q, followed by a newline or carriage return so it registers that Q has been 'typed' and 'entered'.
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            ostream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public String sendRequest(String connection_id) {
