@@ -44,7 +44,7 @@ public class ICStudyCanvas extends CanvasFrame {
     private List<ICSeeFilter> filters;
     private ICSeeFilter selectedFilter;
     private int selectedIndex;
-    private static String connection_id = "scify_test";
+    private static String connection_id = "prod_test";
 
     public ICStudyCanvas(String title) {
         super(title);

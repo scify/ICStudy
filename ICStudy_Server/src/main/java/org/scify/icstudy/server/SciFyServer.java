@@ -23,7 +23,7 @@ import java.util.Scanner;
 public class SciFyServer {
 
     Process pr;
-    private static String connection_id = "scify_test";
+    private static String connection_id = "prod_test";
     GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
     int width = gd.getDisplayMode().getWidth();
     int height = gd.getDisplayMode().getHeight();
