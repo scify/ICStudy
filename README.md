@@ -25,7 +25,7 @@ This is a Maven-based project (<a href="https://maven.apache.org/">https://maven
 <b>The following steps should be followed for both sub-directories</b> (ICStudy_Client and ICStudy_Server)
 
 1. mvn validate (Validate that the project is correct and all necessary information is available)
-2. mvn package exec:java -Dplatform.dependencies (Take the compiled code and package it in its distributable format, such as a JAR, along with the dependencies)
+2. mvn package -Dplatform.dependencies (Take the compiled code and package it in its distributable format, such as a JAR, along with the dependencies)
 
 Deployment
 ----------
