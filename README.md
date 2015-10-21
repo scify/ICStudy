@@ -14,8 +14,9 @@ We can support filtering on feed live-streamed from another computer (through UD
 Installation - Dependencies
 ---------------------------
 1. Install Yasm (assembler /disassembler for the Intel x86 architecture) by running sudo apt-get install yasm
-2. Download and install ffmpeg protocol (Warning: Do not download it from aptitude, choose this link instead: <a href="https://www.ffmpeg.org">https://www.ffmpeg.org</a>)
+2. In order for the Server code to run, download and install ffmpeg protocol (Warning: Do not download it from aptitude, choose this link instead: <a href="https://www.ffmpeg.org">https://www.ffmpeg.org</a>)
 3. In order for the Server code to run, jre (Java Runtime Environment) 7 or higher is required.
+4. In order for the Server code to run on windows, an additional UScreenCapture library is required. Get it from <a href="http://www.umediaserver.net/umediaserver/download.html">here.</a>
 4. This project makes use of a Laravel sub-project (initialized as a Git submodule) in order for the client and the server to communicate. Read more in the README of the submodule.
 
 Compilation
