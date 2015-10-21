@@ -36,6 +36,11 @@ Run java -jar ICStudy_Server/target/ICStudy_Server-1.0-SNAPSHOT-jar-with-depende
 For the Client application:
 Run java -jar ICStudy_Client/target/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar
 
+User/developer guidelines
+-------------------------
+Download the User Guidelines from <a href="http://icstudy.projects.development1.scify.org/www/files/ICSee_developer_guidelines.pdf">here.</a>
+Download the Developer Guidelines from <a href="http://icstudy.projects.development1.scify.org/www/files/ICStudy_developer_guidelines.pdf">here.</a>
+
 Main Technologies
 -----------------
 <a href="http://opencv.org/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/32/OpenCV_Logo_with_text_svg_version.svg/750px-OpenCV_Logo_with_text_svg_version.svg.png" alt="OpenCV" width="100px"></a>
