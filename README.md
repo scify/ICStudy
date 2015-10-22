@@ -42,6 +42,60 @@ Download the User Guidelines from <a href="http://icstudy.projects.development1.
 
 Download the Developer Guidelines from <a href="http://icstudy.projects.development1.scify.org/www/files/ICStudy_developer_guidelines.pdf">here.</a>
 
+Πίνακας παραδοτέων
+------------------
+
+<table>
+  <tr>
+    <th width="50px">Α/ Α</th>
+    <th>Περιγραφή δράσης</th>
+    <th>Τεκμηρίωση</th>
+  </tr>
+  <tr>
+    <td>Α</td>
+    <td>Υλοποίηση της εφαρμογής ICStudy</td>
+    <td>Το ICStudy υπάρχει διαθέσιμο στο GitHub και εγκατεστημένη στο Ειδικό Δημοτικό Σχολείο Τυφλών Καλλιθέας.</td>
+  </tr>
+  <tr>
+    <td>Β</td>
+    <td colspan="2">Υλικό για διασφάλιση της δυνατότητας διάχυσης του ICSee</td>
+  </tr>
+  <tr>
+    <td>Β1</td>
+    <td>Προσφορά του κώδικα της εφαρμογής ως ανοικτού κώδικα.</td>
+    <td>Το έργο βρισκεται στο GitHub σε αυτόν τον σύνδεσμο:
+        https://github.com/ellak-monades-aristeias/ICStudy-v1</td>
+  </tr>
+  <tr>
+    <td>Β2</td>
+    <td>Υποστηρικτικό υλικό</td>
+    <td>Η τεκμηρίωση είναι στο GitHub.</td>
+  </tr>
+  <tr>
+    <td>Γ</td>
+    <td colspan="2">Προώθηση του ICStudy</td>
+  </tr>
+  <tr>
+    <td>Γ1</td>
+    <td>Δοκιμαστική εγκατάσταση της συνολικής λύσης σε ένα σχολείο και δημιουργία σχετικού προωθητικού υλικού.</td>
+    <td>Εγκατάσταση στο Ειδικό Δημοτικό Σχολείο Τυφλών Καλλιθέας και προώθηση στα κοινωνικά δίκτυα της SciFY</td>
+  </tr>
+  <tr>
+    <td>Γ2</td>
+    <td>Προώθηση του ICStudy, της συνεργασίας με την ΕΛ/ΛΑΚ, και των σημαντικών εξελίξεων του project μέσω του δικτύου συνεργατών, των δράσεων και μέσων επικοινωνίας της SciFY</td>
+    <td>Στο Newsletter της SciFY (http://eepurl.com/bAuv11)
+        Στα Social media της SciFY
+        <ul>
+        <li>Google+ (https://goo.gl/cLQQVR)</li>
+        <li>Facebook
+        (https://www.facebook.com/SciFY.org)</li>
+        <li>Twitter
+        (https://twitter.com/scify_org)</li>
+        </ul>
+        Ειδική παρουσίαση στην ημέρα Λευκού Μπαστουνιού, όπως φαίνεται και στο προφίλ μας στο Facebook</td>
+  </tr>
+</table>
+
 Main Technologies
 -----------------
 <a href="http://opencv.org/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/32/OpenCV_Logo_with_text_svg_version.svg/750px-OpenCV_Logo_with_text_svg_version.svg.png" alt="OpenCV" width="100px"></a>
