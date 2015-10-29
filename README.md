@@ -38,7 +38,7 @@ Run java -jar ICStudy_Client/target/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.j
 
 User/developer guidelines
 -------------------------
-Download the User Guidelines from <a href="http://icstudy.projects.development1.scify.org/www/files/ICSee_developer_guidelines.pdf">here.</a>
+Download the User Guidelines from <a href="http://icstudy.projects.development1.scify.org/www/files/ICStudyinstallationinstructions.pdf">here.</a>
 
 Download the Developer Guidelines from <a href="http://icstudy.projects.development1.scify.org/www/files/ICStudy_developer_guidelines.pdf">here.</a>
 
