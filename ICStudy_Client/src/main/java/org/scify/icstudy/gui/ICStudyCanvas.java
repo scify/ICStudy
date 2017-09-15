@@ -17,10 +17,12 @@ package org.scify.icstudy.gui;
 
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacv.CanvasFrame;
+import org.bytedeco.javacv.Frame;
+import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.scify.icstudy.filters.ICSeeFilter;
 import org.scify.icstudy.filters.NullFilter;
 import org.scify.icstudy.network.NetworkList;
-import org.scify.icstudy.properties.SciFyPropertyValues;
+import org.scify.icstudy.properties.PropertyHandler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -60,7 +62,6 @@ public class ICStudyCanvas extends CanvasFrame {
     }
 
     private void sendRequest(String ip, String connection_id) {
-        //String url = "http://users.iit.demokritos.gr/~ggianna/ICStudy/registerIP.php?school=true&clientIp=" + ip;
         String url = "http://icstudy.projects.development1.scify.org/www/ICStudy-server/public/api/clientsignup?connection_id=" + connection_id + "&client_ip=" + ip;
         int responseCode = 0;
         try {
@@ -79,31 +80,14 @@ public class ICStudyCanvas extends CanvasFrame {
     }
 
     private String getSavedIp() {
-        SciFyPropertyValues properties = new SciFyPropertyValues();
-        String propIp = "";
-        try {
-            propIp = properties.getValue("ip");
-            System.out.println("saved ip is: " + propIp);
-        } catch(IOException e) {
-            System.out.println(e);
-        }
+        PropertyHandler properties = new PropertyHandler();
+        String propIp;
+        propIp = properties.getValue("client_ip");
+        System.out.println("saved ip is: " + propIp);
         return propIp;
     }
 
     private String getNewIp() {
-        SciFyPropertyValues properties = new SciFyPropertyValues();
-        NetworkList networkList = new NetworkList();
-        String ip = networkList.initNetworks();
-        try {
-            properties.setValue("ip", ip);
-        } catch(IOException e) {
-            System.out.println(e);
-        }
-        System.out.println("new IP is: " + ip);
-        return ip;
-    }
-
-    private String getNewIpNoSave() {
         NetworkList networkList = new NetworkList();
         String ip = networkList.initNetworks();
 
@@ -113,15 +97,12 @@ public class ICStudyCanvas extends CanvasFrame {
 
     private void initComponents() {
 
-        /*String ip = getSavedIp();
-        if(ip == "") {
+        String ip = getSavedIp();
+        if(ip == null) {
             ip = getNewIp();
-
-
-        }*/
-        String ip = getNewIpNoSave();
-        sendRequest(ip, connection_id);
-
+        }
+        PropertyHandler propertyHandler = new PropertyHandler();
+        propertyHandler.setValue("client_ip", ip);
         KeyListener controls = new KeyListener() {
 
             @Override
@@ -130,31 +111,6 @@ public class ICStudyCanvas extends CanvasFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-//                if (e.getKeyCode() == KeyEvent.VK_UP) {
-//                    if (zoom + speed < inputImage.width() / 2) {
-//                        zoom += speed;
-//                    }
-//                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-//                    if (zoom - speed >= 0) {
-//                        zoom -= speed;
-//                    }
-//                } else if (e.getKeyCode() == KeyEvent.VK_D) {
-//                    if (roi.x() + roi.width() + speed < inputImage.width()) {
-//                        offsetX += speed;
-//                    }
-//                } else if (e.getKeyCode() == KeyEvent.VK_A) {
-//                    if (roi.x() - speed >= 0) {
-//                        offsetX -= speed;
-//                    }
-//                } else if (e.getKeyCode() == KeyEvent.VK_S) {
-//                    if (roi.y() + roi.height() + speed < inputImage.height()) {
-//                        offsetY += speed;
-//                    }
-//                } else if (e.getKeyCode() == KeyEvent.VK_W) {
-//                    if (roi.y() - speed >= 0) {
-//                        offsetY -= speed;
-//                    }
-//                }
             }
 
             @Override
@@ -167,18 +123,6 @@ public class ICStudyCanvas extends CanvasFrame {
                     previousFilter();
                     System.out.println("Switched to "
                             + selectedFilter);
-//                } else if (e.getKeyCode() == KeyEvent.VK_R) {
-//                    zoom = 0;
-//                    offsetX = 0;
-//                    offsetY = 0;
-//                } else if (e.getKeyCode() == KeyEvent.VK_Q) {
-//                    dispose();
-//                } else if (e.getKeyCode() == KeyEvent.VK_1) {
-//                    speed = SPEED_1;
-//                } else if (e.getKeyCode() == KeyEvent.VK_2) {
-//                    speed = SPEED_2;
-//                } else if (e.getKeyCode() == KeyEvent.VK_3) {
-//                    speed = SPEED_3;
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     System.out.println("escape");
@@ -251,7 +195,10 @@ public class ICStudyCanvas extends CanvasFrame {
      * @param image
      */
     public void showImage(IplImage image) {
-        super.showImage(selectedFilter.filter(image));
+        //super.showImage(selectedFilter.filter(image));
+        OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
+        Frame img = converter.convert(selectedFilter.filter(image));
+        super.showImage(img);
     }
 //    public void showImage(IplImage image) {
 //        inputImage = image;

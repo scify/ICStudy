@@ -18,7 +18,9 @@ package org.scify.icstudy;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import org.bytedeco.javacpp.opencv_core.IplImage;
+import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
+import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.scify.icstudy.filters.ManualBinarizationFilter;
 import org.scify.icstudy.filters.ManualInverseBinarizationFilter;
 import org.scify.icstudy.gui.ICStudyCanvas;
@@ -50,7 +52,9 @@ public class WebcamSetup {
 
         grabber.start();
         while (canvas.isDisplayable()) {
-            curImg = grabber.grab();
+            OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
+            Frame img = grabber.grab();
+            curImg = converter.convert(img);
             if (curImg != null) {
                 canvas.showImage(curImg);
             }

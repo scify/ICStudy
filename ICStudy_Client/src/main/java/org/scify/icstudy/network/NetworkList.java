@@ -26,7 +26,7 @@ public class NetworkList {
         boolean next = false;
         Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
         String osName = System.getProperty("os.name");
-        System.out.println(osName);
+
         if(! new String("Linux").equals(osName) ) {
             try {
                 InetAddress IP = InetAddress.getLocalHost();
@@ -39,10 +39,6 @@ public class NetworkList {
         }
 
         for (InetAddress inetAddress : Collections.list(inetAddresses)) {
-            System.out.println(inetAddress.toString());
-            System.out.println(inetAddress.getCanonicalHostName());
-            System.out.println(inetAddress.getHostName());
-            System.out.println(inetAddress.isLoopbackAddress());
             if(next) {
                 return inetAddress.toString().substring(inetAddress.toString().lastIndexOf("/") + 1);
             }

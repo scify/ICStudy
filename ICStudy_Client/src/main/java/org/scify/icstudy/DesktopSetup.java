@@ -22,7 +22,9 @@ import javax.swing.*;
 
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
+import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
+import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.scify.icstudy.filters.ManualBinarizationFilter;
 import org.scify.icstudy.filters.ManualInverseBinarizationFilter;
 import org.scify.icstudy.gui.ICStudyCanvas;
@@ -107,8 +109,7 @@ public class DesktopSetup {
 //        FrameGrabber grabber = new FFmpegFrameGrabber("http://192.168.1.4:5152/desktop.ogg");
 //        grabber.setFormat(args[2]);
 //        grabber.setFormat("mpeg4");
-        System.out.println("Screen height: " + SCR_HEIGHT);
-        System.out.println("Screen width: " + SCR_WIDTH);
+
         grabber.setImageWidth(SCR_WIDTH);
         grabber.setImageHeight(SCR_HEIGHT);
 
@@ -124,12 +125,14 @@ public class DesktopSetup {
         IplImage curImg;
 
         long lLastUpdate = 0L;
-        System.out.println("before grabber.start()");
         grabber.start();
         System.out.println("after grabber.start()");
         while (canvas.isDisplayable()) {
 
-            curImg = grabber.grab();
+            //curImg = grabber.grab();
+            OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
+            Frame img = grabber.grab();
+            curImg = converter.convert(img);
             System.out.println("img: " + curImg);
             // Drop if less than 0.1 have passed
             long lNow = new Date().getTime();
