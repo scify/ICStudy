@@ -41,10 +41,11 @@ public class SciFyServer {
             ip = ipManager.getIPFromServer(connection_id);
         }
         System.out.println(ip);
+        System.out.println("platform: " + osName);
         String screenResolution = width + "x" + height;
         try {
             File encodingFile = new File(".encoding");
-            if(new String("Linux").equals(osName) ) {
+            if("Linux".equals(osName) ) {
                 /*OLD WAY, it works, but overloads the OutputStream*/
                 /*That is why we used the encodingFile*/
                 //this.pr = rt.exec("ffmpeg -loglevel debug -v verbose -s 1024x768 -f x11grab -i :0.0 -r 30 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
@@ -52,6 +53,7 @@ public class SciFyServer {
                 try {
                     // Use a ProcessBuilder
                     ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-s", screenResolution, "-f", "x11grab", "-i", ":0.0", "-r", "30", "-vcodec", "mpeg4", "-q", "1", "-f", "mpegts","udp://" + ip + ":25055");
+                    System.out.println("ffmpeg " + "-s " + screenResolution + " -f " + "x11grab " + "-i " + ":0.0 " + "-r " + "30 " + "-vcodec " + "mpeg4 " + "-q " + "1 " + "-f " + "mpegts " +"udp://" + ip + ":25055");
                     encodingFile.createNewFile();
                     pb.redirectErrorStream(true);
                     pb.redirectInput(ProcessBuilder.Redirect.PIPE); //optional, default behavior
@@ -64,6 +66,7 @@ public class SciFyServer {
                 }
 
             } else {
+                System.out.println("Setting up server for Windows");
                 //Runtime.getRuntime().exec("ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055");
                 //String query = "ffmpeg -f dshow  -i video=\"UScreenCapture\"  -r 10 -vcodec mpeg4 -q 1 -f mpegts udp://" + ip + ":25055";
                 try
@@ -81,7 +84,10 @@ public class SciFyServer {
                     {
                         System.out.println(line);
                     }*/
+                    System.out.println("Before process builder");
                     ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-s", screenResolution, "-f", "dshow","-i", "video=\"UScreenCapture\"", "-r", "10", "-vcodec", "mpeg4", "-q", "1", "-f", "mpegts","udp://" + ip + ":25055");
+                    System.out.println("After process builder");
+                    System.out.println("ffmpeg " + "-s " + screenResolution + " -f " + "dshow " +"-i " + "video=\"UScreenCapture\"" + " -r " + "10 " + "-vcodec " + "mpeg4 " + "-q " + "1 " + "-f " + "mpegts " +"udp://" + ip + ":25055");
                     encodingFile.createNewFile();
                     pb.redirectErrorStream(true);
                     pb.redirectInput(ProcessBuilder.Redirect.PIPE); //optional, default behavior
