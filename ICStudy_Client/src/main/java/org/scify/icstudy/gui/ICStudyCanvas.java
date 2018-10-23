@@ -47,9 +47,11 @@ public class ICStudyCanvas extends CanvasFrame {
     private ICSeeFilter selectedFilter;
     private int selectedIndex;
     private static String connection_id = "prod_test";
+    protected PropertyHandler properties;
 
     public ICStudyCanvas(String title) {
         super(title);
+        properties = new PropertyHandler();
         filters = new ArrayList();
         selectedFilter = new NullFilter();
 //        roi = new CvRect();
@@ -80,10 +82,10 @@ public class ICStudyCanvas extends CanvasFrame {
     }
 
     private String getSavedIp() {
-        PropertyHandler properties = new PropertyHandler();
         String propIp;
         propIp = properties.getValue("client_ip");
-        System.out.println("saved ip is: " + propIp);
+        if (propIp != null)
+            System.out.println("saved ip is: " + propIp);
         return propIp;
     }
 
@@ -101,8 +103,7 @@ public class ICStudyCanvas extends CanvasFrame {
         if(ip == null) {
             ip = getNewIp();
         }
-        PropertyHandler propertyHandler = new PropertyHandler();
-        propertyHandler.setValue("client_ip", ip);
+        properties.setValue("client_ip", ip);
         KeyListener controls = new KeyListener() {
 
             @Override

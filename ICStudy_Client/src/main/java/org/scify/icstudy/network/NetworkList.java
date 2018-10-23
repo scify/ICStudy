@@ -27,7 +27,7 @@ public class NetworkList {
         Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
         String osName = System.getProperty("os.name");
 
-        if(! new String("Linux").equals(osName) ) {
+        if(!"Linux".equals(osName) ) {
             try {
                 InetAddress IP = InetAddress.getLocalHost();
                 String ipWindows = IP.getHostAddress();
@@ -59,11 +59,11 @@ public class NetworkList {
             Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
             for (NetworkInterface netint : Collections.list(nets)) {
                 ip = displayInterfaceInformation(netint);
-                if(ip !="")
+                if(ip != null && !ip.equals(""))
                     return ip;
             }
         } catch(SocketException se) {
-            System.out.println(se);
+            System.err.println(se);
         }
         return "";
     }
