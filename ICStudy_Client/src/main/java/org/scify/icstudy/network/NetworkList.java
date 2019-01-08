@@ -15,7 +15,6 @@
  */
 package org.scify.icstudy.network;
 
-import java.io.*;
 import java.net.*;
 import java.util.*;
 import static java.lang.System.out;

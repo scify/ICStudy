@@ -27,9 +27,6 @@ import org.scify.icstudy.properties.PropertyHandler;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,13 +37,9 @@ import java.util.Scanner;
  */
 public class ICStudyCanvas extends CanvasFrame {
 
-//    private static final int SPEED_1 = 5;
-//    private static final int SPEED_2 = 10;
-//    private static final int SPEED_3 = 20;
     private List<ICSeeFilter> filters;
     private ICSeeFilter selectedFilter;
     private int selectedIndex;
-    private static String connection_id = "prod_test";
     protected PropertyHandler properties;
 
     public ICStudyCanvas(String title) {
@@ -54,31 +47,9 @@ public class ICStudyCanvas extends CanvasFrame {
         properties = new PropertyHandler();
         filters = new ArrayList();
         selectedFilter = new NullFilter();
-//        roi = new CvRect();
         selectedIndex = 0;
-//        zoom = 0;
-//        offsetX = 0;
-//        offsetY = 0;
-//        speed = SPEED_1;
-        initComponents();
-    }
 
-    private void sendRequest(String ip, String connection_id) {
-        String url = "http://icstudy.projects.development1.scify.org/www/ICStudy-server/public/api/clientsignup?connection_id=" + connection_id + "&client_ip=" + ip;
-        int responseCode = 0;
-        try {
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            // optional default is GET
-            con.setRequestMethod("GET");
-            responseCode = con.getResponseCode();
-        } catch (MalformedURLException e) {
-            System.out.println(e);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
+        initComponents();
     }
 
     private String getSavedIp() {
@@ -92,7 +63,6 @@ public class ICStudyCanvas extends CanvasFrame {
     private String getNewIp() {
         NetworkList networkList = new NetworkList();
         String ip = networkList.initNetworks();
-
         System.out.println("new IP is: " + ip);
         return ip;
     }

@@ -48,67 +48,18 @@ public class DesktopSetup {
 
     public static void main(String[] args) throws FrameGrabber.Exception {
 
-        // args[0] = The IP (i.e 192.168.1.1)
-        // args[1] = The filename that holds the stream (i.e desktopRecording)
-        // args[2] = The extension of the file (i.e mp4)
-        // TODO: Restore
-//        FrameGrabber grabber = new FFmpegFrameGrabber("http://" + args[0] + "/" + args[1] + "." + args[2]);
         final String sPort;
         if (args.length > 0)
             sPort = args[0];
         else
             sPort = "25055";
 
-        /*final JFrame frame = new JFrame("ICStudy");
-
-        frame.setSize(500, 250);
-
-        final JTextField txt = new JTextField("");
-        javax.swing.JLabel label = new JLabel("Πληκτρολογήστε το όνομα του τμήματος και πατήστε OK");
-
-        label.setBounds(20, 20, 500, 30);
-        txt.setBounds(20, 60, 300, 30);
-        JButton button = new JButton("OK");
-        button.setBounds(100, 100, 200, 40);
-        frame.add(label);
-        frame.add(txt);
-        frame.add(button);
-        frame.setLayout(null);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                final String getTxt = txt.getText();
-                //TODO: verify string and connect to new service
-                try {
-                    Thread thread = new Thread() {
-                        public void run() {
-                            try {
-                                createICStudyCanvas(sPort);
-                            }catch (Exception exc) {
-                                System.out.println("Exception: " + exc.getMessage());
-                            }
-                        }
-                    };
-                    thread.start();
-
-                } catch (Exception ex) {
-                    System.out.println("Exception: " + ex.getMessage());
-                }
-                frame.setVisible(false);
-            }
-        });*/
         createICStudyCanvas(sPort);
     }
 
     private static void createICStudyCanvas(String sPort) throws FrameGrabber.Exception {
         FrameGrabber grabber = new FFmpegFrameGrabber("udp://@:" + sPort);
         System.out.println("Listening on port " + sPort);
-//        FrameGrabber grabber = new FFmpegFrameGrabber("x.sdp");
-//        FrameGrabber grabber = new FFmpegFrameGrabber("http://192.168.1.4:5152/desktop.ogg");
-//        grabber.setFormat(args[2]);
-//        grabber.setFormat("mpeg4");
 
         grabber.setImageWidth(SCR_WIDTH);
         grabber.setImageHeight(SCR_HEIGHT);
@@ -121,10 +72,12 @@ public class DesktopSetup {
         // Available filters
         canvas.addFilter(new ManualBinarizationFilter());
         canvas.addFilter(new ManualInverseBinarizationFilter());
-
+        canvas.setVisible(true);
+        canvas.validate();
         IplImage curImg;
 
         long lLastUpdate = 0L;
+        System.out.println("before grabber.start()");
         grabber.start();
         System.out.println("after grabber.start()");
         while (canvas.isDisplayable()) {
