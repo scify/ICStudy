@@ -1,0 +1,7 @@
+target/
+nb-configuration.xml
+nbactions.xml
+.idea/
+*.jar
+.directory
+**/config.properties
