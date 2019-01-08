@@ -4,4 +4,4 @@ nbactions.xml
 .idea/
 *.jar
 .directory
-*/config.properties
+**/config.properties
