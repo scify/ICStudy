@@ -7,9 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class IPManager {
-    public String getIPFromServer(String connection_id) {
-        //String urlToRead = "http://users.iit.demokritos.gr/~ggianna/ICStudy/ip.txt";
-        String urlToRead = "http://icstudy.projects.development1.scify.org/www/ICStudy-server/public/api/getclientip?connection_id=" + connection_id;
+    public String getIPFromServer() {
+        String urlToRead = "http://users.iit.demokritos.gr/~ggianna/ICStudy/ip.txt";
         System.out.println(urlToRead);
         URL url;
         HttpURLConnection conn;
