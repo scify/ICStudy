@@ -14,10 +14,11 @@ We can support filtering on feed live-streamed from another computer (through UD
 Installation - Dependencies
 ---------------------------
 1. Install Yasm (assembler /disassembler for the Intel x86 architecture) by running sudo apt-get install yasm
-2. In order for the Server code to run, download and install ffmpeg protocol (Warning: Do not download it from aptitude, choose this link instead: <a href="https://www.ffmpeg.org">https://www.ffmpeg.org</a>)
-3. In order for the Server code to run, jre (Java Runtime Environment) 7 or higher is required.
+2. In order for the Server code to run, download and install ffmpeg
+3. In order for both the Client and the Server code to run, jre (Java Runtime Environment) 7 or higher is required.
 4. In order for the Server code to run on windows, an additional UScreenCapture library is required. Get it from <a href="http://www.umediaserver.net/umediaserver/download.html">here.</a>
-4. This project makes use of a Laravel sub-project (initialized as a Git submodule) in order for the client and the server to communicate. Read more in the README of the submodule.
+
+This project was tested using ffmpeg version ***3.4.4***
 
 Compilation
 -----------
@@ -25,22 +26,24 @@ This is a Maven-based project (<a href="https://maven.apache.org/">https://maven
 
 <b>The following steps should be followed for both sub-directories</b> (ICStudy_Client and ICStudy_Server)
 
-1. mvn validate (Validate that the project is correct and all necessary information is available)
-2. mvn package -Dplatform.dependencies (Take the compiled code and package it in its distributable format, such as a JAR, along with the dependencies)
+1. `mvn validate` (Validate that the project is correct and all necessary information is available)
+2. `mvn package -Dplatform.dependencies` (Take the compiled code and package it in its distributable format, such as a JAR, along with the dependencies)
 
 Deployment
 ----------
 For the Server application:
-Run java -jar ICStudy_Server/target/ICStudy_Server-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+```bash
+java -jar ICStudy_Server/target/ICStudy_Server-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
+
 
 For the Client application:
-Run java -jar ICStudy_Client/target/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar
+```bash
+java -jar ICStudy_Client/target/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
 
-User/developer guidelines
--------------------------
-Download the User Guidelines from <a href="http://icstudy.projects.development1.scify.org/www/files/ICStudyinstallationinstructions.pdf">here.</a>
 
-Download the Developer Guidelines from <a href="http://icstudy.projects.development1.scify.org/www/files/ICStudy_developer_guidelines.pdf">here.</a>
 
 Πίνακας παραδοτέων
 ------------------
