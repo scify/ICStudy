@@ -19,6 +19,7 @@ import org.bytedeco.javacv.FrameGrabber;
 import org.scify.icstudy.filters.ManualBinarizationFilter;
 import org.scify.icstudy.filters.ManualInverseBinarizationFilter;
 import org.scify.icstudy.gui.ICStudyCanvas;
+import org.scify.icstudy.network.NetworkList;
 
 import javax.swing.*;
 
@@ -35,8 +36,10 @@ public class DesktopSetup {
             sPort = args[0];
         else
             sPort = "25055";
+        NetworkList networkList = new NetworkList();
+        String ip = networkList.initNetworks();
 
-        ClientDisplay clientDisplay = new ClientDisplay(sPort, createCanvas());
+        ClientDisplay clientDisplay = new ClientDisplay(ip, sPort, createCanvas());
         clientDisplay.listenAndDisplay();
     }
 

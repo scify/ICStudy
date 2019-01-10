@@ -1,15 +1,14 @@
 package org.scify.icstudy;
 
 import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.opencv_videoio;
+import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.*;
+import org.bytedeco.javacv.FrameGrabber;
+import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.scify.icstudy.gui.ICStudyCanvas;
 
 import java.awt.*;
 import java.util.Date;
-
-import static org.bytedeco.javacpp.opencv_videoio.CAP_FFMPEG;
 
 public class ClientDisplay {
 
@@ -17,14 +16,16 @@ public class ClientDisplay {
     private static final int SCR_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
     ICStudyCanvas canvas;
     String sPort;
+    String ip;
 
-    public ClientDisplay(String sPort, ICStudyCanvas canvas) {
+    public ClientDisplay(String ip, String sPort, ICStudyCanvas canvas) {
+        this.ip = ip;
         this.sPort = sPort;
         this.canvas = canvas;
     }
 
     public void listenAndDisplay() throws FrameGrabber.Exception {
-        FrameGrabber grabber = new FFmpegFrameGrabber("udp://192.168.1.11:" + sPort);
+        FrameGrabber grabber = new FFmpegFrameGrabber("udp://" + ip + ":" + sPort);
         System.out.println("Listening on port " + sPort);
 
         grabber.setImageWidth(SCR_WIDTH);
