@@ -15,36 +15,18 @@
  */
 package org.scify.icstudy;
 
-import java.awt.Toolkit;
-import java.lang.Exception;
-import java.util.Date;
-import javax.swing.*;
-
-import org.bytedeco.javacpp.opencv_core.IplImage;
-import org.bytedeco.javacv.FFmpegFrameGrabber;
-import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
-import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.scify.icstudy.filters.ManualBinarizationFilter;
 import org.scify.icstudy.filters.ManualInverseBinarizationFilter;
 import org.scify.icstudy.gui.ICStudyCanvas;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 
 /**
  *
  * @author peustr
  */
 public class DesktopSetup {
-
-    private static final int SCR_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
-    private static final int SCR_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
 
     public static void main(String[] args) throws FrameGrabber.Exception {
 
@@ -54,16 +36,11 @@ public class DesktopSetup {
         else
             sPort = "25055";
 
-        createICStudyCanvas(sPort);
+        ClientDisplay clientDisplay = new ClientDisplay(sPort, createCanvas());
+        clientDisplay.listenAndDisplay();
     }
 
-    private static void createICStudyCanvas(String sPort) throws FrameGrabber.Exception {
-        FrameGrabber grabber = new FFmpegFrameGrabber("udp://@:" + sPort);
-        System.out.println("Listening on port " + sPort);
-
-        grabber.setImageWidth(SCR_WIDTH);
-        grabber.setImageHeight(SCR_HEIGHT);
-
+    private static ICStudyCanvas createCanvas() {
         ICStudyCanvas canvas = new ICStudyCanvas("Desktop source");
         canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         canvas.setLocation(0, 0);
@@ -74,39 +51,6 @@ public class DesktopSetup {
         canvas.addFilter(new ManualInverseBinarizationFilter());
         canvas.setVisible(true);
         canvas.validate();
-        IplImage curImg;
-
-        long lLastUpdate = 0L;
-        System.out.println("before grabber.start()");
-        grabber.start();
-        System.out.println("after grabber.start()");
-        while (canvas.isDisplayable()) {
-
-            //curImg = grabber.grab();
-            OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
-            Frame img = grabber.grab();
-            curImg = converter.convert(img);
-            System.out.println("img: " + curImg);
-            // Drop if less than 0.1 have passed
-            long lNow = new Date().getTime();
-            if (lNow - lLastUpdate < 500)
-                continue;
-            lLastUpdate = lNow;
-
-            if (curImg != null) {
-                canvas.showImage(curImg);
-                // Flush the bufer with a 2% chance
-//                if (Math.random() < 0.02) {
-//                    // DEBUG LINES
-//                    System.out.println("Flushing buffer..");
-//                    //////////////
-//                    grabber.flush();
-//                }
-                System.err.println("Received data...");
-            } else {
-                System.out.println("received a null img!");
-            }
-        }
-        grabber.stop();
+        return canvas;
     }
 }
