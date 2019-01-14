@@ -1,4 +1,4 @@
-ICStudy
+ICStudy (I Can Study)
 =======
 
 [![HitCount](http://hits.dwyl.io/scify/ICStudy.svg)](http://hits.dwyl.io/scify/ICStudy)[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
