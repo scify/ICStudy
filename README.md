@@ -34,13 +34,13 @@ Deployment
 For the Server application:
 
 ```bash
-java -jar ICStudy_Server/target/ICStudy_Server-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar ICStudy_Server/target/ICStudy-Server-2.0-jar-with-dependencies.jar
 ```
 
 
 For the Client application:
 ```bash
-java -jar ICStudy_Client/target/ICStudy-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar ICStudy_Client/target/ICStudy-Student-2.0-jar-with-dependencies.jar
 ```
 
 
